@@ -2,8 +2,7 @@ version: "3.9"
 
 services:
   traefik:
-    image: traefik:v2.10
-    platform: linux/amd64
+    image: traefik:${TRAEFIK_STACK_SERVER_TAG}
     command:
       # Docker provider
       - "--providers.docker=true"
@@ -11,7 +10,6 @@ services:
       - "--providers.docker.network=ayon-network"
       # HTTP entrypoint
       - "--entrypoints.web.address=:80"
-
       # Dashboard (LOCAL ONLY!)
       - "--api.dashboard=true"
       - "--api.insecure=true"

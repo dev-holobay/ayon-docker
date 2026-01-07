@@ -73,7 +73,7 @@ services:
       - ayon-network
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/api/info"]
+      test: ["CMD", "curl", "-f", "http://localhost:${AYON_STACK_SERVER_PORT}/api/info"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -81,9 +81,9 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ayon.rule=Host(`${MY_DOMAIN}`)"
+      - "traefik.http.routers.ayon.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.ayon.entrypoints=web"
-      - "traefik.http.services.ayon.loadbalancer.server.port=5000"
+      - "traefik.http.services.ayon.loadbalancer.server.port=${AYON_STACK_SERVER_PORT}"
 
   worker:
     image: ynput/ayon-ash:${AYON_STACK_WORKER_TAG}
@@ -93,7 +93,7 @@ services:
         condition: service_healthy
 
     environment:
-      - AYON_SERVER_URL=http://server:5000
+      - AYON_SERVER_URL=http://server:${AYON_STACK_SERVER_PORT}
       - AYON_API_KEY=${AYON_API_KEY}
 
     volumes:

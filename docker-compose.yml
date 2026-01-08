@@ -84,6 +84,8 @@ services:
       - "traefik.http.routers.ayon.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.ayon.entrypoints=web"
       - "traefik.http.services.ayon.loadbalancer.server.port=${AYON_STACK_SERVER_PORT}"
+      - "traefik.http.services.ayon.loadbalancer.sticky.cookie=true"
+      - "traefik.http.services.ayon.loadbalancer.sticky.cookie.name=ayon_session_sticky"
 
   worker:
     image: ynput/ayon-ash:${AYON_STACK_WORKER_TAG}

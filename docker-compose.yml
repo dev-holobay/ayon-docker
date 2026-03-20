@@ -10,6 +10,8 @@ services:
       - "--providers.docker.network=ayon-network"
       # HTTP entrypoint
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.forwardedHeaders.insecure=true"
+      - "--entrypoints.web.forwardedHeaders.trustedIPs=0.0.0.0/0,::/0"
       # Dashboard (LOCAL ONLY!)
       - "--api.dashboard=true"
       - "--api.insecure=true"
@@ -83,7 +85,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ayon.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.ayon.rule=Host(`${DOMAIN}`) || Host(`mac.netbird.cloud`)"
       - "traefik.http.routers.ayon.entrypoints=web"
       - "traefik.http.services.ayon.loadbalancer.server.port=${AYON_STACK_SERVER_PORT}"
       - "traefik.http.services.ayon.loadbalancer.sticky.cookie=true"

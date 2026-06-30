@@ -85,7 +85,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ayon.rule=Host(`${DOMAIN}`) || Host(`mac.netbird.cloud`)"
+      - "traefik.http.routers.ayon.rule=Host(`${DOMAIN}`) || Host(`mac.netbird.cloud`) || Host(`mac.netbird.holo`)"
       - "traefik.http.routers.ayon.entrypoints=web"
       - "traefik.http.services.ayon.loadbalancer.server.port=${AYON_STACK_SERVER_PORT}"
       - "traefik.http.services.ayon.loadbalancer.sticky.cookie=true"

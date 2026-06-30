@@ -44,6 +44,7 @@ services:
 
     environment:
       - "AYON_DISABLE_CHECK_SESSION_IP=true"
+      - "AYON_SESSION_TTL=259200"
 
     depends_on:
       postgres:
